@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Add a New Flashcard {% endblock %}</h1>
+    <form method="post">
+        <label for="title">Question</label>
+        <br>
+        <input type="text" name="title"
+               placeholder="Question here"
+               value="{{ request.form['title'] }}"></input>
+        <br>
+
+        <label for="content">Answer</label>
+        <br>
+        <textarea name="content"
+                  placeholder="Answer here"
+                  rows="15"
+                  cols="60"
+                  >{{ request.form['content'] }}</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

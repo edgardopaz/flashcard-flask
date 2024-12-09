@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}
+Study
+{% endblock %}
+
+{% block content %}
+<div class="study-container">
+    <h2>Study Your Flashcards</h2>
+    {% if flashcards %}
+        <div id="flashcard-container">
+            <!-- Flashcards -->
+            {% for flashcard in flashcards %}
+            <div class="flashcard" id="flashcard-{{ loop.index0 }}" data-index="{{ loop.index0 }}">
+                <div class="question" data-index="{{ loop.index0 }}">
+                    <strong>Question:</strong> {{ flashcard['question'] }}
+                </div>
+                <div class="answer" style="display: none;" data-index="{{ loop.index0 }}">
+                    <strong>Answer:</strong> {{ flashcard['answer'] }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button id="prev-btn" onclick="changeCard(-1)">Previous</button>
+            <button id="next-btn" onclick="changeCard(1)">Next</button>
+        </div>
+
+        <!-- Text below buttons -->
+        <p style="text-align: center; margin-top: 20px;">(Click on the question to reveal the answer.)</p>
+    {% else %}
+        <p>No flashcards found. Create some first!</p>
+    {% endif %}
+</div>
+
+<script>
+    let currentCardIndex = 0;  // To track the current flashcard
+
+    // Function to flip the card between question and answer
+    function flipCard(index) {
+        const flashcard = document.querySelector(`#flashcard-${index}`);
+        const question = flashcard.querySelector('.question');
+        const answer = flashcard.querySelector('.answer');
+        
+        if (question.style.display === "none") {
+            question.style.display = "block";
+            answer.style.display = "none";
+        } else {
+            question.style.display = "none";
+            answer.style.display = "block";
+        }
+    }
+
+    // Function to switch to the next or previous card
+    function changeCard(direction) {
+        const flashcards = document.querySelectorAll('.flashcard');
+        const totalCards = flashcards.length;
+
+        currentCardIndex += direction;
+
+        if (currentCardIndex < 0) {
+            currentCardIndex = totalCards - 1;  
+        } else if (currentCardIndex >= totalCards) {
+            currentCardIndex = 0;  
+        }
+
+        // Hide all flashcards and reset to question after clicking on previous or next
+        flashcards.forEach(card => {
+            card.style.display = "none";
+            const question = card.querySelector('.question');
+            const answer = card.querySelector('.answer');
+            question.style.display = "block";  
+            answer.style.display = "none";  
+        });
+
+        // Show the current flashcard
+        flashcards[currentCardIndex].style.display = "block";
+    }
+
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        changeCard(0);  
+
+        const flashcards = document.querySelectorAll('.flashcard');
+        flashcards.forEach(card => {
+            const question = card.querySelector('.question');
+            const answer = card.querySelector('.answer');
+            
+            question.addEventListener('click', function () {
+                flipCard(card.dataset.index);
+            });
+            answer.addEventListener('click', function () {
+                flipCard(card.dataset.index);
+            });
+        });
+    });
+</script>
+{% endblock %}

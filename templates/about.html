@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <!-- styling for about me page -->
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        nav {
+            text-align: center;
+            background-color: #333;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 15px;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            gap: 2rem;
+            flex-grow: 1;
+        }
+
+        .bio-text {
+            max-width: 50%;
+            text-align: left;
+        }
+
+        .bio-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio-text p {
+            margin-bottom: 1rem;
+        }
+
+        .profile-pic {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Me</h1>
+    </header>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('create') }}">Create</a>
+        <a href="{{ url_for('study') }}">Study</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </nav>
+    <main>
+        <div class="bio-text">
+            <h2>Welcome!</h2>
+            <p>
+                My name is Edgardo Paz-Romero, and I am currently a computer science student at Temple University, set to graduate in 2028.
+            </p>
+            <p>
+                This website is my final project for the Introduction to Python Programming class. I’ve combined Flask and SQLite to build a flashcard application designed to make studying easier.
+            </p>
+            <p>
+                Through this project, I’ve learned the fundamentals of web development, database management, and backend programming. I’m excited to share this work and look forward to growing my skills in software development!
+            </p>
+        </div>
+        <img src="{{ url_for('static', filename='IMG_6392.jpeg') }}" alt="Your Profile Picture" class="profile-pic">
+    </main>
+    <footer>
+        <p>&copy; 2024 Flashcard Flask</p>
+    </footer>
+</body>
+</html>
