@@ -2,7 +2,7 @@ import sqlite3, os
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
 
 app = Flask(__name__) # gives flask the dunder name to let it know that this is the main application
-app.config.from_object('config')
+app.config.from_pyfile('config.py')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # path to the current file 
 DB_PATH = os.path.join(BASE_DIR, "database.db") # path to the database we want to use
